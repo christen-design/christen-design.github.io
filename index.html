@@ -1,367 +1,413 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Christen Rhoadarmer | Senior Designer + Art Director</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-        }
-        .hero-bg {
-            background: linear-gradient(135deg, #FF6B6B 0%, #FFE66D 100%);
-        }
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        .carousel-track {
-            scroll-snap-type: x mandatory;
-        }
-        .carousel-slide {
-            scroll-snap-align: start;
-        }
-        .fade-in {
-            animation: fadeIn 0.8s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .text-gradient {
-            background: linear-gradient(90deg, #FF6B6B 0%, #FF8E53 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Christen Rhoadarmer | Senior Designer + Art Director</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+    body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+    .hero-bg { background: linear-gradient(135deg, #FF6B6B 0%, #FFE66D 100%); }
+    .project-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);}
+    .fade-in { animation: fadeIn 0.8s ease-in-out; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+    .scrubber::-webkit-scrollbar { display: none; }
+    .scrubber { scrollbar-width: none; }
+    .modal-bg { background: rgba(30,30,30,0.87);}
+    .modal-active { display: flex !important; }
+    .modal { transition: all .3s cubic-bezier(.25,.8,.25,1); }
+    .text-gradient { background: linear-gradient(90deg,#FF6B6B 0%,#FF8E53 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  </style>
 </head>
 <body class="bg-white text-gray-800">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full bg-white/90 backdrop-blur-md z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                <a href="#" class="text-2xl font-bold text-gray-900">christen<span class="text-gradient">.</span></a>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#work" class="text-gray-600 hover:text-gray-900 transition">Work</a>
-                    <a href="#about" class="text-gray-600 hover:text-gray-900 transition">About</a>
-                    <a href="#process" class="text-gray-600 hover:text-gray-900 transition">Process</a>
-                    <a href="#contact" class="text-gray-600 hover:text-gray-900 transition">Contact</a>
-                </div>
-                <button class="md:hidden text-gray-600">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
+  <!-- Navigation -->
+  <nav class="fixed w-full bg-white/90 backdrop-blur-md z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-20 items-center">
+        <a href="#" class="text-2xl font-bold text-gray-900">christen<span class="text-gradient">.</span></a>
+        <div class="hidden md:flex space-x-8">
+          <a href="#work" class="text-gray-600 hover:text-gray-900 transition">Work</a>
+          <a href="#about" class="text-gray-600 hover:text-gray-900 transition">About</a>
+          <a href="#process" class="text-gray-600 hover:text-gray-900 transition">Process</a>
+          <a href="#contact" class="text-gray-600 hover:text-gray-900 transition">Contact</a>
         </div>
-    </nav>
+        <button class="md:hidden text-gray-600">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
 
-    <!-- HERO / ABOUT -->
-    <section id="hero" class="hero-bg min-h-screen flex items-center pt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div class="max-w-2xl fade-in">
-                <h1 class="text-5xl md:text-7xl font-bold text-white mb-4">Christen Rhoadarmer</h1>
-                <h2 class="text-2xl md:text-3xl font-medium text-white mb-6">Senior Designer + Art Director</h2>
-                <p class="text-xl md:text-2xl text-white font-medium mb-8">
-                    With 14 years of diverse experience, I specialize in visualizing brand identities, crafting impactful print and digital content for multi-channel campaigns, and creating human-centered web designs that captivate, resonate, and inspire.
-                </p>
-                <p class="text-lg text-white mb-10">
-                    My approach blends bold creativity with real-world impact—let’s make something beautiful together.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#work" class="bg-white text-orange-600 hover:bg-gray-100 px-8 py-4 rounded-full font-bold text-lg transition duration-300 shadow-lg hover:shadow-xl">See My Work ↓</a>
-                    <a href="#contact" class="border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-full font-bold text-lg transition duration-300">Let's Connect</a>
-                </div>
-                <div class="mt-10 flex space-x-6">
-                    <a href="mailto:christen@email.com" class="text-white hover:text-gray-200 transition"><i class="fas fa-envelope text-xl"></i></a>
-                    <a href="https://www.linkedin.com/in/christen" class="text-white hover:text-gray-200 transition"><i class="fab fa-linkedin-in text-xl"></i></a>
-                </div>
-            </div>
+  <!-- HERO / ABOUT -->
+  <section id="hero" class="hero-bg min-h-screen flex items-center pt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="max-w-2xl fade-in">
+        <h1 class="text-5xl md:text-7xl font-bold text-white mb-4">Christen Rhoadarmer</h1>
+        <h2 class="text-2xl md:text-3xl font-medium text-white mb-6">Senior Designer + Art Director</h2>
+        <p class="text-xl md:text-2xl text-white font-medium mb-8">
+          With 14 years of diverse experience, I specialize in visualizing brand identities, crafting impactful print and digital content for multi-channel campaigns, and creating human-centered web designs that captivate, resonate, and inspire.
+        </p>
+        <p class="text-lg text-white mb-10">
+          My approach blends bold creativity with real-world impact—let’s make something beautiful together.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="#work" class="bg-white text-orange-600 hover:bg-gray-100 px-8 py-4 rounded-full font-bold text-lg transition duration-300 shadow-lg hover:shadow-xl">See My Work ↓</a>
+          <a href="#contact" class="border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-full font-bold text-lg transition duration-300">Let's Connect</a>
         </div>
-    </section>
-
-    <!-- FEATURED PROJECTS CAROUSEL -->
-    <section id="work" class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Featured Projects</h2>
-            <div class="relative">
-                <div class="carousel-track flex overflow-x-auto pb-8 gap-6 px-2 -mx-2" style="scrollbar-width: none;">
-                    <!-- Shop Local Campaign -->
-                    <div class="carousel-slide flex-shrink-0 w-80 md:w-96 bg-white rounded-2xl overflow-hidden shadow-lg project-card transition duration-300">
-                        <img src="/assets/reading-terminal-shoplocal.jpg" alt="Shop Local Campaign – Reading Terminal Market" class="w-full h-56 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Shop Local Campaign</h3>
-                            <span class="block text-orange-500 mb-1">Reading Terminal Market</span>
-                            <p class="text-gray-600 mb-4">
-                                Re-established Reading Terminal as Philly’s go-to for locals. Led concept, copy, photography, and multi-channel rollout: vibrant bus ads, seasonal recipe mailers, Metro wraps, and more.<br>
-                                <span class="italic">“Fresh food for Philly—just one ride away.”</span>
-                            </p>
-                            <a href="#reading-terminal" class="text-orange-500 font-medium hover:text-orange-600 transition">View Case Study →</a>
-                        </div>
-                    </div>
-                    <!-- Buccini Pollin Group -->
-                    <div class="carousel-slide flex-shrink-0 w-80 md:w-96 bg-white rounded-2xl overflow-hidden shadow-lg project-card transition duration-300">
-                        <img src="/assets/bpg-properties-web.jpg" alt="Buccini Pollin Group Rental Properties Website" class="w-full h-56 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Website Template</h3>
-                            <span class="block text-orange-500 mb-1">Buccini Pollin Group</span>
-                            <p class="text-gray-600 mb-4">
-                                Created a modular web template for BPG’s diverse rental properties. Responsible for branding, layout, UX/UI, and high-fidelity prototyping.<br>
-                                <a href="https://www.figma.com/proto/S0dUCkFst8TCHeZqi2MSRZ/BPG-Properties?page-id=0%3A1&type=design&node-id=76-453&viewport=-4219%2C1369%2C0.71&t=7O6xuxTRrENjypi6-1&scaling=min-zoom&starting-point-node-id=76%3A453&mode=design" class="underline text-orange-600 hover:text-orange-700">View Prototype</a>
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Truist Trudee AI Concierge -->
-                    <div class="carousel-slide flex-shrink-0 w-80 md:w-96 bg-white rounded-2xl overflow-hidden shadow-lg project-card transition duration-300">
-                        <img src="/assets/truist-trudee.jpg" alt="Truist Trudee AI Concierge" class="w-full h-56 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Trudee AI Concierge</h3>
-                            <span class="block text-orange-500 mb-1">Truist Bank</span>
-                            <p class="text-gray-600 mb-4">
-                                Creative Director & character designer for “Trudee,” the digital concierge for Truist. Led campaign assets, illustration, copy, banners, table tents, and digital ads for team onboarding and employee engagement.
-                            </p>
-                        </div>
-                    </div>
-                    <!-- SpArc Philly Rebrand -->
-                    <div class="carousel-slide flex-shrink-0 w-80 md:w-96 bg-white rounded-2xl overflow-hidden shadow-lg project-card transition duration-300">
-                        <img src="/assets/sparc-rebrand.jpg" alt="SpArc Philly Rebrand" class="w-full h-56 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">SpArc Rebrand</h3>
-                            <span class="block text-orange-500 mb-1">SpArc Philadelphia</span>
-                            <p class="text-gray-600 mb-4">
-                                Reimagined SpArc’s identity with vibrant color and joyful photography. Created brand guidelines and collateral: business cards, brochures, signage, donor mailers, and more.
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Continental Battery Systems -->
-                    <div class="carousel-slide flex-shrink-0 w-80 md:w-96 bg-white rounded-2xl overflow-hidden shadow-lg project-card transition duration-300">
-                        <img src="/assets/continental-battery-page.jpg" alt="Continental Battery Product Page" class="w-full h-56 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Product Page & Social Campaign</h3>
-                            <span class="block text-orange-500 mb-1">Continental Battery Systems</span>
-                            <p class="text-gray-600 mb-4">
-                                Designed modular product pages for hundreds of SKUs and managed multi-platform social campaigns. Assets included QR-linked landing pages, story content, and Instagram reels.<br>
-                                <a href="https://www.figma.com/proto/m0OPvbatpw8UcyVQtbOKqr/CBS_Product-Page-Template?page-id=0%3A1&type=design&node-id=72-363&viewport=-2424%2C607%2C0.3&t=GTPoEHNIOkde9tu3-1&scaling=min-zoom&starting-point-node-id=72%3A363&content-scaling=fixed&hide-ui=1" class="underline text-orange-600 hover:text-orange-700">View Product Page</a>
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Dead Flowers Brand -->
-                    <div class="carousel-slide flex-shrink-0 w-80 md:w-96 bg-white rounded-2xl overflow-hidden shadow-lg project-card transition duration-300">
-                        <img src="/assets/deadflowers-brand.jpg" alt="Dead Flowers Brand" class="w-full h-56 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Dead Flowers Brand</h3>
-                            <span class="block text-orange-500 mb-1">Dead Flowers Collective</span>
-                            <p class="text-gray-600 mb-4">
-                                Built the identity for Philly’s wildest collective—logo, event posters, merch, photography, and stage management for live sideshow events.<br>
-                                <span class="italic">“Amaze, entertain, shock, and wow the audience.”</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="mt-10 flex space-x-6">
+          <a href="mailto:christen@email.com" class="text-white hover:text-gray-200 transition"><i class="fas fa-envelope text-xl"></i></a>
+          <a href="https://www.linkedin.com/in/christen" class="text-white hover:text-gray-200 transition"><i class="fab fa-linkedin-in text-xl"></i></a>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- CASE STUDY: READING TERMINAL MARKET -->
-    <section id="reading-terminal" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="order-2 md:order-1">
-                    <span class="text-orange-500 font-medium">Brand Identity & Campaign</span>
-                    <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-6">Shop Local Campaign</h2>
-                    <p class="text-xl text-gray-600 mb-6">
-                        “Shop Local” re-established Reading Terminal Market as <b>the</b> grocery for Philly locals, not just tourists. Christen served as Art Director & Graphic Designer—leading concept, copy, photography, and execution. Multi-channel rollout: bus ads, direct mailers, Metro wraps, recipe cards.<br>
-                        <span class="italic">Mission: “Provide fresh foods to the people of Philadelphia and curate an environment that celebrates the diversity of its citizens.”</span>
-                    </p>
-                    <div class="mb-8">
-                        <h3 class="font-bold text-lg mb-3">Project Details</h3>
-                        <ul class="space-y-2">
-                            <li class="flex items-start"><i class="fas fa-circle text-orange-500 text-xs mt-2 mr-3"></i><span>Role: Art Director, Graphic Designer</span></li>
-                            <li class="flex items-start"><i class="fas fa-circle text-orange-500 text-xs mt-2 mr-3"></i><span>Led concept, copy, design, and photography</span></li>
-                            <li class="flex items-start"><i class="fas fa-circle text-orange-500 text-xs mt-2 mr-3"></i><span>Assets: bus shelter ads, direct mailers, seasonal recipes, banners</span></li>
-                            <li class="flex items-start"><i class="fas fa-circle text-orange-500 text-xs mt-2 mr-3"></i><span>Goal: “Fresh food for Philly—just one ride away.”</span></li>
-                        </ul>
-                    </div>
-                    <a href="https://www.figma.com/proto/S0dUCkFst8TCHeZqi2MSRZ/BPG-Properties?page-id=0%3A1&type=design&node-id=76-453&viewport=-4219%2C1369%2C0.71&t=7O6xuxTRrENjypi6-1&scaling=min-zoom&starting-point-node-id=76%3A453&mode=design" class="inline-flex items-center text-orange-500 font-medium hover:text-orange-600 transition">View Prototype<i class="fas fa-arrow-right ml-2"></i></a>
-                </div>
-                <div class="order-1 md:order-2">
-                    <div class="relative group">
-                        <img src="/assets/reading-terminal-campaign.jpg" alt="Shop Local Campaign" class="rounded-2xl shadow-xl w-full">
-                    </div>
-                    <div class="grid grid-cols-2 gap-4 mt-4">
-                        <img src="/assets/reading-terminal-mailer.jpg" alt="Direct Mailer" class="rounded-xl shadow-md h-40 object-cover">
-                        <img src="/assets/reading-terminal-metro.jpg" alt="Metro Wrap" class="rounded-xl shadow-md h-40 object-cover">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- PROJECT NAVIGATION SCRUBBER -->
+  <div class="sticky top-20 z-40 bg-white/90 py-2 shadow-sm scrubber overflow-x-auto flex gap-4 justify-center border-b border-gray-100">
+    <a href="#proj-reading-terminal" class="px-4 py-2 text-orange-600 font-bold rounded hover:bg-orange-50 transition whitespace-nowrap">Shop Local (Reading Terminal)</a>
+    <a href="#proj-bpg" class="px-4 py-2 text-orange-600 font-bold rounded hover:bg-orange-50 transition whitespace-nowrap">BPG Rental Web</a>
+    <a href="#proj-truist" class="px-4 py-2 text-orange-600 font-bold rounded hover:bg-orange-50 transition whitespace-nowrap">Trudee Concierge</a>
+    <a href="#proj-sparc" class="px-4 py-2 text-orange-600 font-bold rounded hover:bg-orange-50 transition whitespace-nowrap">SpArc Rebrand</a>
+    <a href="#proj-continental" class="px-4 py-2 text-orange-600 font-bold rounded hover:bg-orange-50 transition whitespace-nowrap">Continental Battery</a>
+    <a href="#proj-deadflowers" class="px-4 py-2 text-orange-600 font-bold rounded hover:bg-orange-50 transition whitespace-nowrap">Dead Flowers</a>
+  </div>
 
-    <!-- PROCESS / ABOUT BLOCK -->
-    <section id="process" class="py-20 bg-gray-50">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">How I Work</h2>
-            <p class="text-lg text-gray-700 mb-8 text-center">
-                I craft brands and campaigns with empathy, intention, and joy. Every project starts with listening: to a client’s story, the community’s needs, and the heart of the brand. I believe design should be bold, inclusive, and always people-centered.
+  <!-- FEATURED PROJECTS CAROUSEL -->
+  <section id="work" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Featured Projects</h2>
+      <div class="grid md:grid-cols-3 gap-10">
+        <!-- Shop Local Campaign -->
+        <div id="proj-reading-terminal" class="bg-white rounded-2xl overflow-hidden shadow-lg project-card transition duration-300">
+          <img src="/assets/reading-terminal/shop-local-hero.jpg" alt="Shop Local Campaign Hero" class="w-full h-56 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Shop Local Campaign</h3>
+            <span class="block text-orange-500 mb-1">Reading Terminal Market</span>
+            <p class="text-gray-600 mb-4">
+              Re-established Reading Terminal as Philly’s go-to for locals. Led concept, copy, photography, and multi-channel rollout: vibrant bus ads, seasonal recipe mailers, Metro wraps, and more.<br>
+              <span class="italic">“Fresh food for Philly—just one ride away.”</span>
             </p>
-            <div class="flex flex-wrap justify-center gap-6">
-                <div class="bg-white p-6 rounded-2xl shadow-lg w-72">
-                    <h3 class="text-xl font-bold mb-2">Discovery</h3>
-                    <p class="text-gray-600">Learn the client’s vision, research context, define real goals.</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-lg w-72">
-                    <h3 class="text-xl font-bold mb-2">Concept</h3>
-                    <p class="text-gray-600">Explore directions, sketch, build out storyboards or wireframes.</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-lg w-72">
-                    <h3 class="text-xl font-bold mb-2">Execution</h3>
-                    <p class="text-gray-600">Iterate and refine: visuals, copy, assets, UX, and handoff with precision.</p>
-                </div>
-            </div>
+            <button data-modal="modal-reading-terminal" class="text-orange-500 font-medium hover:text-orange-600 transition underline">View Full Case Study</button>
+          </div>
         </div>
-    </section>
-
-    <!-- OPTIONAL: FOOD PHOTOGRAPHY / HOBBY BLOCK -->
-    <section class="py-20 bg-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">Recipe Cards & Food Photography</h2>
-            <p class="text-lg text-gray-600 mb-8">
-                My love for cooking sparked when designing recipe cards for Reading Terminal Market. Every dish—cooked, photographed, and tasted by me—brings a little more flavor to my creative life.
+        <!-- BPG Rental Web -->
+        <div id="proj-bpg" class="bg-white rounded-2xl overflow-hidden shadow-lg project-card transition duration-300">
+          <img src="/assets/bpg/web-template-hero.jpg" alt="BPG Rental Web Hero" class="w-full h-56 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Rental Properties Web Template</h3>
+            <span class="block text-orange-500 mb-1">Buccini Pollin Group</span>
+            <p class="text-gray-600 mb-4">
+              Created a modular web template for BPG’s diverse rental properties. Responsible for branding, layout, UX/UI, and high-fidelity prototyping.
             </p>
-            <div class="grid grid-cols-2 gap-6">
-                <img src="/assets/food-photo-1.jpg" alt="Market Recipe Card" class="rounded-xl shadow-lg object-cover h-48 w-full">
-                <img src="/assets/food-photo-2.jpg" alt="Christen's Food Photography" class="rounded-xl shadow-lg object-cover h-48 w-full">
-            </div>
+            <button data-modal="modal-bpg" class="text-orange-500 font-medium hover:text-orange-600 transition underline">View Full Case Study</button>
+          </div>
         </div>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Kind Words</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-gray-50 p-8 rounded-2xl">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-500 mr-4">
-                            <i class="fas fa-quote-left"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold">Sarah K.</h4>
-                            <p class="text-sm text-gray-500">Reading Terminal Market</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-600">"Christen's campaign completely transformed how locals view our market. Her designs captured the energy and diversity that makes us special."</p>
-                </div>
-                <div class="bg-gray-50 p-8 rounded-2xl">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-500 mr-4">
-                            <i class="fas fa-quote-left"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold">Michael T.</h4>
-                            <p class="text-sm text-gray-500">Neighbors Credit Union</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-600">"Working with Christen was a game-changer. She understood our mission immediately and created a visual identity that resonated with our members."</p>
-                </div>
-                <div class="bg-gray-50 p-8 rounded-2xl">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-500 mr-4">
-                            <i class="fas fa-quote-left"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold">Jamie L.</h4>
-                            <p class="text-sm text-gray-500">Dead Flowers Collective</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-600">"Christen gave our underground circus the perfect visual voice—edgy but approachable, mysterious but inviting. The merch sells out every show!"</p>
-                </div>
-            </div>
+        <!-- Truist Trudee AI Concierge -->
+        <div id="proj-truist" class="bg-white rounded-2xl overflow-hidden shadow-lg project-card transition duration-300">
+          <img src="/assets/truist/trudee-hero.jpg" alt="Trudee Concierge Hero" class="w-full h-56 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Trudee AI Concierge</h3>
+            <span class="block text-orange-500 mb-1">Truist Bank</span>
+            <p class="text-gray-600 mb-4">
+              Creative Director & character designer for “Trudee,” the digital concierge for Truist. Led campaign assets, illustration, copy, banners, table tents, and digital ads for team onboarding and employee engagement.
+            </p>
+            <button data-modal="modal-truist" class="text-orange-500 font-medium hover:text-orange-600 transition underline">View Full Case Study</button>
+          </div>
         </div>
-    </section>
-
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="py-20 bg-gradient-to-br from-orange-500 to-yellow-400">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Let's Create Something Meaningful</h2>
-                <p class="text-xl text-white/90 mb-10">Have a project in mind or just want to chat design? I'd love to hear from you.</p>
-                <form class="space-y-6">
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <input type="text" placeholder="Your Name" class="w-full px-6 py-4 rounded-xl bg-white/90 focus:bg-white focus:outline-none transition duration-300">
-                        </div>
-                        <div>
-                            <input type="email" placeholder="Email Address" class="w-full px-6 py-4 rounded-xl bg-white/90 focus:bg-white focus:outline-none transition duration-300">
-                        </div>
-                    </div>
-                    <div>
-                        <input type="text" placeholder="Subject" class="w-full px-6 py-4 rounded-xl bg-white/90 focus:bg-white focus:outline-none transition duration-300">
-                    </div>
-                    <div>
-                        <textarea placeholder="Tell me about your project..." rows="5" class="w-full px-6 py-4 rounded-xl bg-white/90 focus:bg-white focus:outline-none transition duration-300"></textarea>
-                    </div>
-                    <div>
-                        <button type="submit" class="bg-white text-orange-600 hover:bg-gray-100 px-10 py-4 rounded-xl font-bold text-lg transition duration-300 shadow-lg hover:shadow-xl">Send Message</button>
-                    </div>
-                </form>
-                <div class="mt-16">
-                    <p class="text-white/90 mb-6">Or reach out directly:</p>
-                    <div class="flex justify-center space-x-8">
-                        <a href="mailto:christen@email.com" class="bg-white/10 hover:bg-white/20 text-white p-4 rounded-full transition duration-300">
-                            <i class="fas fa-envelope text-xl"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/christen" class="bg-white/10 hover:bg-white/20 text-white p-4 rounded-full transition duration-300">
-                            <i class="fab fa-linkedin-in text-xl"></i>
-                        </a>
-                        <a href="https://dribbble.com/christen" class="bg-white/10 hover:bg-white/20 text-white p-4 rounded-full transition duration-300">
-                            <i class="fab fa-dribbble text-xl"></i>
-                        </a>
-                        <a href="https://instagram.com/christen" class="bg-white/10 hover:bg-white/20 text-white p-4 rounded-full transition duration-300">
-                            <i class="fab fa-instagram text-xl"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <!-- SpArc Philly Rebrand -->
+        <div id="proj-sparc" class="bg-white rounded-2xl overflow-hidden shadow-lg project-card transition duration-300">
+          <img src="/assets/sparc/rebrand-hero.jpg" alt="SpArc Rebrand Hero" class="w-full h-56 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">SpArc Rebrand</h3>
+            <span class="block text-orange-500 mb-1">SpArc Philadelphia</span>
+            <p class="text-gray-600 mb-4">
+              Reimagined SpArc’s identity with vibrant color and joyful photography. Created brand guidelines and collateral: business cards, brochures, signage, donor mailers, and more.
+            </p>
+            <button data-modal="modal-sparc" class="text-orange-500 font-medium hover:text-orange-600 transition underline">View Full Case Study</button>
+          </div>
         </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <a href="/" class="text-2xl font-bold">christen<span class="text-orange-500">.</span></a>
-                    <p class="mt-2 text-gray-400">Let’s make something beautiful together.</p>
-                </div>
-                <div class="flex space-x-6">
-                    <a href="mailto:christen@email.com" class="hover:text-orange-400">Email</a>
-                    <a href="https://www.linkedin.com/in/christen" class="hover:text-orange-400">LinkedIn</a>
-                    <a href="https://dribbble.com/christen" class="hover:text-orange-400">Dribbble</a>
-                    <a href="https://instagram.com/christen" class="hover:text-orange-400">Instagram</a>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
-                <p class="text-gray-500">© 2024 Christen Rhoadarmer. Crafted with love in Philadelphia.</p>
-            </div>
+        <!-- Continental Battery Systems -->
+        <div id="proj-continental" class="bg-white rounded-2xl overflow-hidden shadow-lg project-card transition duration-300">
+          <img src="/assets/continental-battery/product-page-hero.jpg" alt="Continental Battery Product Page Hero" class="w-full h-56 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Product Page & Social Campaign</h3>
+            <span class="block text-orange-500 mb-1">Continental Battery Systems</span>
+            <p class="text-gray-600 mb-4">
+              Designed modular product pages for hundreds of SKUs and managed multi-platform social campaigns. Assets included QR-linked landing pages, story content, and Instagram reels.
+            </p>
+            <button data-modal="modal-continental" class="text-orange-500 font-medium hover:text-orange-600 transition underline">View Full Case Study</button>
+          </div>
         </div>
-    </footer>
+        <!-- Dead Flowers Brand -->
+        <div id="proj-deadflowers" class="bg-white rounded-2xl overflow-hidden shadow-lg project-card transition duration-300">
+          <img src="/assets/deadflowers/brand-hero.jpg" alt="Dead Flowers Brand Hero" class="w-full h-56 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Dead Flowers Brand</h3>
+            <span class="block text-orange-500 mb-1">Dead Flowers Collective</span>
+            <p class="text-gray-600 mb-4">
+              Built the identity for Philly’s wildest collective—logo, event posters, merch, photography, and stage management for live sideshow events.<br>
+              <span class="italic">“Amaze, entertain, shock, and wow the audience.”</span>
+            </p>
+            <button data-modal="modal-deadflowers" class="text-orange-500 font-medium hover:text-orange-600 transition underline">View Full Case Study</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- CAROUSEL SCRIPT -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const track = document.querySelector('.carousel-track');
-            const slides = Array.from(document.querySelectorAll('.carousel-slide'));
-            if (!track || !slides.length) return;
-            // Carousel logic: Left/right scroll (optional)
-            // Set first slide as current (can extend to add nav arrows if desired)
-            slides[0].classList.add('current-slide');
+  <!-- MODALS / DEEP DIVES -->
+  <div id="modal-reading-terminal" class="fixed modal-bg left-0 top-0 w-full h-full z-50 hidden items-center justify-center">
+    <div class="modal bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 relative p-8">
+      <button class="absolute top-4 right-4 text-gray-500 text-2xl close-modal"><i class="fas fa-times"></i></button>
+      <div class="flex flex-col md:flex-row gap-8">
+        <div class="md:w-1/2">
+          <img src="/assets/reading-terminal/shop-local-hero.jpg" alt="Shop Local Campaign Hero" class="rounded-xl shadow-lg mb-4">
+          <img src="/assets/reading-terminal/direct-mailer.jpg" alt="Direct Mailer" class="rounded-xl shadow mb-2">
+          <img src="/assets/reading-terminal/metro-wrap.jpg" alt="Metro Wrap" class="rounded-xl shadow">
+        </div>
+        <div class="md:w-1/2">
+          <h2 class="text-2xl font-bold mb-3">Shop Local Campaign – Reading Terminal Market</h2>
+          <p class="mb-3">
+            “Shop Local” re-established Reading Terminal Market as <b>the</b> grocery for Philly locals, not just tourists. I served as Art Director & Graphic Designer—leading concept, copy, photography, and execution.
+          </p>
+          <ul class="mb-4 list-disc pl-5 text-gray-600">
+            <li>Multi-channel rollout: bus ads, direct mailers, Metro wraps, recipe cards.</li>
+            <li>Goal: “Fresh food for Philly—just one ride away.”</li>
+            <li>Emphasized local pride, accessibility, and seasonal recipes.</li>
+          </ul>
+          <a href="https://www.figma.com/proto/S0dUCkFst8TCHeZqi2MSRZ/BPG-Properties?page-id=0%3A1&type=design&node-id=76-453&viewport=-4219%2C1369%2C0.71&t=7O6xuxTRrENjypi6-1&scaling=min-zoom&starting-point-node-id=76%3A453&mode=design"
+             class="inline-block mt-2 text-orange-500 font-medium underline hover:text-orange-700" target="_blank">View Prototype</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-bpg" class="fixed modal-bg left-0 top-0 w-full h-full z-50 hidden items-center justify-center">
+    <div class="modal bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 relative p-8">
+      <button class="absolute top-4 right-4 text-gray-500 text-2xl close-modal"><i class="fas fa-times"></i></button>
+      <div class="flex flex-col md:flex-row gap-8">
+        <div class="md:w-1/2">
+          <img src="/assets/bpg/web-template-hero.jpg" alt="Web Template Hero" class="rounded-xl shadow-lg mb-4">
+          <img src="/assets/bpg/layout-wireframe.jpg" alt="Wireframe" class="rounded-xl shadow">
+        </div>
+        <div class="md:w-1/2">
+          <h2 class="text-2xl font-bold mb-3">Rental Properties Web Template – BPG</h2>
+          <p class="mb-3">
+            Developed a flexible template for BPG’s property sites: branding, layout, UX/UI, and prototyping.
+          </p>
+          <ul class="mb-4 list-disc pl-5 text-gray-600">
+            <li>Designed for easy content updates and varied brand identities.</li>
+            <li>Rapid prototyping and handoff using Figma.</li>
+          </ul>
+          <a href="https://www.figma.com/proto/S0dUCkFst8TCHeZqi2MSRZ/BPG-Properties?page-id=0%3A1&type=design&node-id=76-453&viewport=-4219%2C1369%2C0.71&t=7O6xuxTRrENjypi6-1&scaling=min-zoom&starting-point-node-id=76%3A453&mode=design"
+             class="inline-block mt-2 text-orange-500 font-medium underline hover:text-orange-700" target="_blank">View Prototype</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-truist" class="fixed modal-bg left-0 top-0 w-full h-full z-50 hidden items-center justify-center">
+    <div class="modal bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 relative p-8">
+      <button class="absolute top-4 right-4 text-gray-500 text-2xl close-modal"><i class="fas fa-times"></i></button>
+      <div class="flex flex-col md:flex-row gap-8">
+        <div class="md:w-1/2">
+          <img src="/assets/truist/trudee-hero.jpg" alt="Trudee Concierge" class="rounded-xl shadow-lg mb-4">
+          <img src="/assets/truist/character-sheet.jpg" alt="Trudee Character Sheet" class="rounded-xl shadow">
+        </div>
+        <div class="md:w-1/2">
+          <h2 class="text-2xl font-bold mb-3">Trudee AI Concierge – Truist Bank</h2>
+          <p class="mb-3">
+            Conceived, designed, and branded “Trudee,” the digital concierge for Truist. Led all creative assets—character, onboarding materials, digital banners, table tents, and more.
+          </p>
+          <ul class="mb-4 list-disc pl-5 text-gray-600">
+            <li>Crafted a friendly, approachable brand voice and visuals.</li>
+            <li>Improved team engagement and digital adoption.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-sparc" class="fixed modal-bg left-0 top-0 w-full h-full z-50 hidden items-center justify-center">
+    <div class="modal bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 relative p-8">
+      <button class="absolute top-4 right-4 text-gray-500 text-2xl close-modal"><i class="fas fa-times"></i></button>
+      <div class="flex flex-col md:flex-row gap-8">
+        <div class="md:w-1/2">
+          <img src="/assets/sparc/rebrand-hero.jpg" alt="SpArc Rebrand Hero" class="rounded-xl shadow-lg mb-4">
+          <img src="/assets/sparc/business-card.jpg" alt="Business Card" class="rounded-xl shadow">
+        </div>
+        <div class="md:w-1/2">
+          <h2 class="text-2xl font-bold mb-3">SpArc Philly Rebrand</h2>
+          <p class="mb-3">
+            Reimagined SpArc’s identity—infused it with bold color and joyful energy. Delivered comprehensive guidelines, print, and event collateral.
+          </p>
+          <ul class="mb-4 list-disc pl-5 text-gray-600">
+            <li>Brand standards, signage, donor mailers, and more.</li>
+            <li>Showcased the vibrancy and inclusivity of SpArc’s mission.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-continental" class="fixed modal-bg left-0 top-0 w-full h-full z-50 hidden items-center justify-center">
+    <div class="modal bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 relative p-8">
+      <button class="absolute top-4 right-4 text-gray-500 text-2xl close-modal"><i class="fas fa-times"></i></button>
+      <div class="flex flex-col md:flex-row gap-8">
+        <div class="md:w-1/2">
+          <img src="/assets/continental-battery/product-page-hero.jpg" alt="Continental Battery Product Page Hero" class="rounded-xl shadow-lg mb-4">
+          <img src="/assets/continental-battery/insta-reel.jpg" alt="Instagram Reel" class="rounded-xl shadow">
+        </div>
+        <div class="md:w-1/2">
+          <h2 class="text-2xl font-bold mb-3">Product Page & Social Campaign – Continental Battery</h2>
+          <p class="mb-3">
+            Designed modular product pages for 100s of SKUs. Built landing pages, managed cross-platform social campaigns, and created story content & reels.
+          </p>
+          <ul class="mb-4 list-disc pl-5 text-gray-600">
+            <li>QR code-driven campaign and seamless digital journey.</li>
+            <li>Increased engagement, easy asset re-use.</li>
+          </ul>
+          <a href="https://www.figma.com/proto/m0OPvbatpw8UcyVQtbOKqr/CBS_Product-Page-Template?page-id=0%3A1&type=design&node-id=72-363&viewport=-2424%2C607%2C0.3&t=GTPoEHNIOkde9tu3-1&scaling=min-zoom&starting-point-node-id=72%3A363&content-scaling=fixed&hide-ui=1"
+             class="inline-block mt-2 text-orange-500 font-medium underline hover:text-orange-700" target="_blank">View Product Page</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-deadflowers" class="fixed modal-bg left-0 top-0 w-full h-full z-50 hidden items-center justify-center">
+    <div class="modal bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 relative p-8">
+      <button class="absolute top-4 right-4 text-gray-500 text-2xl close-modal"><i class="fas fa-times"></i></button>
+      <div class="flex flex-col md:flex-row gap-8">
+        <div class="md:w-1/2">
+          <img src="/assets/deadflowers/brand-hero.jpg" alt="Dead Flowers Brand Hero" class="rounded-xl shadow-lg mb-4">
+          <img src="/assets/deadflowers/event-poster.jpg" alt="Event Poster" class="rounded-xl shadow">
+        </div>
+        <div class="md:w-1/2">
+          <h2 class="text-2xl font-bold mb-3">Dead Flowers Brand</h2>
+          <p class="mb-3">
+            Built the identity for Philly’s wildest collective: logo, event posters, merch, photography, and stage management for live sideshow events.<br>
+            <span class="italic">“Amaze, entertain, shock, and wow the audience.”</span>
+          </p>
+          <ul class="mb-4 list-disc pl-5 text-gray-600">
+            <li>Edgy but approachable visual language.</li>
+            <li>Design, merch, and creative direction for sold-out events.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL SCRIPT -->
+  <script>
+    // Modal open/close logic
+    document.querySelectorAll('[data-modal]').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        const id = btn.getAttribute('data-modal');
+        document.getElementById(id).classList.add('modal-active');
+        document.getElementById(id).classList.remove('hidden');
+        document.body.style.overflow = "hidden";
+      });
+    });
+    document.querySelectorAll('.close-modal').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const modal = btn.closest('.modal-bg');
+        modal.classList.remove('modal-active');
+        setTimeout(() => modal.classList.add('hidden'), 200);
+        document.body.style.overflow = "";
+      });
+    });
+    window.addEventListener('keydown', e => {
+      if (e.key === "Escape") {
+        document.querySelectorAll('.modal-bg.modal-active').forEach(modal => {
+          modal.classList.remove('modal-active');
+          setTimeout(() => modal.classList.add('hidden'), 200);
+          document.body.style.overflow = "";
         });
-    </script>
+      }
+    });
+    // Scrubber jump: smooth scroll
+    document.querySelectorAll('.scrubber a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const hash = this.getAttribute('href');
+        const target = document.querySelector(hash);
+        if(target) {
+          e.preventDefault();
+          window.scrollTo({top: target.offsetTop - 95, behavior: 'smooth'});
+        }
+      });
+    });
+  </script>
+
+  <!-- PROCESS SECTION -->
+  <section id="process" class="py-20 bg-gray-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">How I Work</h2>
+      <p class="text-lg text-gray-700 mb-8 text-center">
+        I craft brands and campaigns with empathy, intention, and joy. Every project starts with listening: to a client’s story, the community’s needs, and the heart of the brand. I believe design should be bold, inclusive, and always people-centered.
+      </p>
+      <div class="flex flex-wrap justify-center gap-6">
+        <div class="bg-white p-6 rounded-2xl shadow-lg w-72">
+          <h3 class="text-xl font-bold mb-2">Discovery</h3>
+          <p class="text-gray-600">Learn the client’s vision, research context, define real goals.</p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg w-72">
+          <h3 class="text-xl font-bold mb-2">Concept</h3>
+          <p class="text-gray-600">Explore directions, sketch, build out storyboards or wireframes.</p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-lg w-72">
+          <h3 class="text-xl font-bold mb-2">Execution</h3>
+          <p class="text-gray-600">Iterate and refine: visuals, copy, assets, UX, and handoff with precision.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="py-20 bg-gradient-to-br from-orange-500 to-yellow-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Let's Create Something Meaningful</h2>
+        <p class="text-xl text-white/90 mb-10">Have a project in mind or just want to chat design? I'd love to hear from you.</p>
+        <a href="mailto:christen@email.com" class="bg-white text-orange-600 hover:bg-gray-100 px-10 py-4 rounded-xl font-bold text-lg transition duration-300 shadow-lg hover:shadow-xl">Email Me</a>
+        <div class="mt-12 flex justify-center space-x-8">
+          <a href="https://www.linkedin.com/in/christen" class="bg-white/10 hover:bg-white/20 text-white p-4 rounded-full transition duration-300">
+            <i class="fab fa-linkedin-in text-xl"></i>
+          </a>
+          <a href="https://dribbble.com/christen" class="bg-white/10 hover:bg-white/20 text-white p-4 rounded-full transition duration-300">
+            <i class="fab fa-dribbble text-xl"></i>
+          </a>
+          <a href="https://instagram.com/christen" class="bg-white/10 hover:bg-white/20 text-white p-4 rounded-full transition duration-300">
+            <i class="fab fa-instagram text-xl"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0">
+          <a href="/" class="text-2xl font-bold">christen<span class="text-orange-500">.</span></a>
+          <p class="mt-2 text-gray-400">Let’s make something beautiful together.</p>
+        </div>
+        <div class="flex space-x-6">
+          <a href="mailto:christen@email.com" class="hover:text-orange-400">Email</a>
+          <a href="https://www.linkedin.com/in/christen" class="hover:text-orange-400">LinkedIn</a>
+          <a href="https://dribbble.com/christen" class="hover:text-orange-400">Dribbble</a>
+          <a href="https://instagram.com/christen" class="hover:text-orange-400">Instagram</a>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+        <p class="text-gray-500">© 2024 Christen Rhoadarmer. Crafted with love in Philadelphia.</p>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
-
