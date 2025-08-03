@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Christen Rhoadarmer | Senior Designer + Art Director</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
@@ -45,6 +46,110 @@
     .modal-active { display: flex !important; }
     .modal { transition: all .3s cubic-bezier(.25,.8,.25,1); }
     .text-gradient { background: linear-gradient(90deg,#FF6B6B 0%,#FF8E53 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    
+    /* PDF Viewer Styles */
+    .pdf-container {
+      height: 85vh;
+      overflow: auto;
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+    }
+    
+    #pdf-viewer-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      overflow: auto;
+      padding: 1rem;
+    }
+    
+    .pdf-controls {
+      background: linear-gradient(135deg, #FF6B6B 0%, #FFE66D 100%);
+      padding: 1rem 1.5rem;
+      border-radius: 1.5rem 1.5rem 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+    
+    .pdf-pagination {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .pdf-btn {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 0.5rem;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+    
+    .pdf-btn:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-1px);
+    }
+    
+    .pdf-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .pdf-page-input {
+      width: 60px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 0.5rem;
+      padding: 6px 8px;
+      text-align: center;
+    }
+    
+    .pdf-page-input::placeholder {
+      color: rgba(255,255,255,0.7);
+    }
+    
+    .pdf-zoom-controls {
+      display: flex;
+      gap: 8px;
+    }
+    
+    canvas {
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    
+    /* Custom scrollbar for PDF viewer */
+    .pdf-container::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .pdf-container::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    .pdf-container::-webkit-scrollbar-thumb {
+      background: #FF6B6B;
+      border-radius: 4px;
+    }
+    
+    .pdf-container::-webkit-scrollbar-thumb:hover {
+      background: #FF8E53;
+    }
   </style>
 </head>
 <body class="bg-white text-gray-800">
@@ -55,7 +160,7 @@
       <div class="flex justify-between h-20 items-center">
         <a href="#" class="text-2xl font-bold text-gray-900">christen<span class="text-gradient">.</span></a>
         <div class="hidden md:flex space-x-8">
-          <a href="#work" class="text-gray-600 hover:text-gray-900 transition">Work</a>
+          <a href="#portfolio" class="text-gray-600 hover:text-gray-900 transition">Portfolio</a>
           <a href="#about" class="text-gray-600 hover:text-gray-900 transition">About</a>
           <a href="#process" class="text-gray-600 hover:text-gray-900 transition">Process</a>
           <a href="#contact" class="text-gray-600 hover:text-gray-900 transition">Contact</a>
@@ -77,10 +182,10 @@
           With 14 years of diverse experience, I specialize in visualizing brand identities, crafting impactful print and digital content for multi-channel campaigns, and creating human-centered web designs that captivate, resonate, and inspire.
         </p>
         <p class="text-lg text-white mb-10">
-          My approach blends bold creativity with real-world impact—let’s make something beautiful together.
+          My approach blends bold creativity with real-world impact—let's make something beautiful together.
         </p>
         <div class="flex flex-col sm:flex-row gap-4">
-          <a href="#work" class="bg-white text-orange-600 hover:bg-gray-100 px-8 py-4 rounded-full font-bold text-lg transition duration-300 shadow-lg hover:shadow-xl">See My Work ↓</a>
+          <a href="#portfolio" class="bg-white text-orange-600 hover:bg-gray-100 px-8 py-4 rounded-full font-bold text-lg transition duration-300 shadow-lg hover:shadow-xl">View Portfolio ↓</a>
           <a href="#contact" class="border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-full font-bold text-lg transition duration-300">Let's Connect</a>
         </div>
         <div class="mt-10 flex space-x-6">
@@ -91,582 +196,295 @@
     </div>
   </section>
 
-  <!-- SPACER FOR HERO TO PROJECTS -->
+  <!-- SPACER FOR HERO TO PORTFOLIO -->
   <div class="h-8"></div>
 
-  <!-- FEATURED PROJECTS CAROUSEL -->
- <section id="work" class="relative pt-32 pb-20 bg-gray-50">
-  <h2 class="relative z-0 text-3xl md:text-4xl font-bold text-center mb-12">Featured Projects</h2>
-  <div class="overflow-x-auto overflow-y-visible w-full" style="padding-bottom:24px;">
-    <div class="carousel-track flex gap-8 relative z-10">
-	    <!-- === Begin Project Cards === -->
-        <!-- Each project card: update modal and src as needed -->
-
-        <!-- 1: Shop Local Campaign -->
-        <div class="carousel-slide">
-          <img src="/assets/reading-terminal/shop-local-hero.jpg" alt="Shop Local Campaign Hero">
-          <div class="flex-1 flex flex-col justify-between p-6">
-            <div>
-              <h3 class="text-xl font-bold mb-2">Shop Local Campaign</h3>
-              <span class="block text-orange-500 mb-1">Reading Terminal Market</span>
-              <p class="text-gray-600 mb-4 text-sm">
-                Re-established Reading Terminal as Philly’s go-to for locals. Led concept, copy, photography, and multi-channel rollout: vibrant bus ads, seasonal recipe mailers, Metro wraps, and more.<br>
-                <span class="italic">“Fresh food for Philly—just one ride away.”</span>
-              </p>
-            </div>
-            <button data-modal="modal-reading-terminal" class="text-orange-500 font-medium hover:text-orange-600 transition underline mt-2">View Full Case Study</button>
+  <!-- PORTFOLIO PDF VIEWER -->
+  <section id="portfolio" class="relative pt-32 pb-20 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Portfolio 2024</h2>
+      <p class="text-lg text-gray-600 text-center mb-12">Explore my latest design projects and creative work</p>
+      
+      <!-- PDF Viewer Container -->
+      <div class="pdf-container">
+        <!-- PDF Controls -->
+        <div class="pdf-controls">
+          <div class="pdf-pagination">
+            <button id="prev-page" class="pdf-btn" disabled>
+              <i class="fas fa-arrow-left"></i> Prev
+            </button>
+            <span>Page</span>
+            <input type="number" id="page-num" class="pdf-page-input" value="1" min="1">
+            <span>of <span id="page-count">1</span></span>
+            <button id="next-page" class="pdf-btn">
+              Next <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+          
+          <div class="pdf-zoom-controls">
+            <button id="zoom-out" class="pdf-btn">
+              <i class="fas fa-search-minus"></i>
+            </button>
+            <button id="zoom-in" class="pdf-btn">
+              <i class="fas fa-search-plus"></i>
+            </button>
+            <button id="fit-window" class="pdf-btn">
+              <i class="fas fa-expand-arrows-alt"></i>
+            </button>
+            <button id="reset-view" class="pdf-btn">
+              <i class="fas fa-sync-alt"></i>
+            </button>
+            <button id="toggle-interactive" class="pdf-btn">
+              <i class="fas fa-mouse-pointer"></i> Interactive
+            </button>
           </div>
         </div>
-        <!-- 2: BPG Rental Web Template -->
-        <div class="carousel-slide">
-          <img src="/assets/bpg/web-template-hero.jpg" alt="BPG Rental Web Hero">
-          <div class="flex-1 flex flex-col justify-between p-6">
-            <div>
-              <h3 class="text-xl font-bold mb-2">Rental Properties Web Template</h3>
-              <span class="block text-orange-500 mb-1">Buccini Pollin Group</span>
-              <p class="text-gray-600 mb-4 text-sm">
-                Created a modular web template for BPG’s diverse rental properties. Responsible for branding, layout, UX/UI, and high-fidelity prototyping.
-              </p>
-            </div>
-            <button data-modal="modal-bpg" class="text-orange-500 font-medium hover:text-orange-600 transition underline mt-2">View Full Case Study</button>
-          </div>
+        
+        <!-- PDF Canvas Container -->
+        <div id="pdf-viewer-container">
+          <canvas id="pdf-canvas"></canvas>
         </div>
-        <!-- 3: Trudee AI Concierge (Truist) -->
-        <div class="carousel-slide">
-          <img src="/assets/truist/trudee-hero.jpg" alt="Trudee Concierge Hero">
-          <div class="flex-1 flex flex-col justify-between p-6">
-            <div>
-              <h3 class="text-xl font-bold mb-2">Trudee AI Concierge</h3>
-              <span class="block text-orange-500 mb-1">Truist Bank</span>
-              <p class="text-gray-600 mb-4 text-sm">
-                Creative Director & character designer for “Trudee,” the digital concierge for Truist. Led campaign assets, illustration, copy, banners, table tents, and digital ads for team onboarding and employee engagement.
-              </p>
-            </div>
-            <button data-modal="modal-truist" class="text-orange-500 font-medium hover:text-orange-600 transition underline mt-2">View Full Case Study</button>
-          </div>
+        
+        <!-- Alternative: Interactive PDF Embed (Hidden by default) -->
+        <div id="interactive-pdf-container" style="display: none;">
+          <embed src="portfolio.pdf" type="application/pdf" width="100%" height="100%" style="min-height: 75vh;">
         </div>
-        <!-- 4: SpArc Philly Rebrand -->
-        <div class="carousel-slide">
-          <img src="/assets/sparc/rebrand-hero.jpg" alt="SpArc Rebrand Hero">
-          <div class="flex-1 flex flex-col justify-between p-6">
-            <div>
-              <h3 class="text-xl font-bold mb-2">SpArc Rebrand</h3>
-              <span class="block text-orange-500 mb-1">SpArc Philadelphia</span>
-              <p class="text-gray-600 mb-4 text-sm">
-                Reimagined SpArc’s identity with vibrant color and joyful photography. Created brand guidelines and collateral: business cards, brochures, signage, donor mailers, and more.
-              </p>
-            </div>
-            <button data-modal="modal-sparc" class="text-orange-500 font-medium hover:text-orange-600 transition underline mt-2">View Full Case Study</button>
-          </div>
-        </div>
-        <!-- 5: Continental Battery Systems -->
-        <div class="carousel-slide">
-          <img src="/assets/continental-battery/product-page-hero.jpg" alt="Continental Battery Product Page Hero">
-          <div class="flex-1 flex flex-col justify-between p-6">
-            <div>
-              <h3 class="text-xl font-bold mb-2">Product Page & Social Campaign</h3>
-              <span class="block text-orange-500 mb-1">Continental Battery Systems</span>
-              <p class="text-gray-600 mb-4 text-sm">
-                Designed modular product pages for hundreds of SKUs and managed multi-platform social campaigns. Assets included QR-linked landing pages, story content, and Instagram reels.
-              </p>
-            </div>
-            <button data-modal="modal-continental" class="text-orange-500 font-medium hover:text-orange-600 transition underline mt-2">View Full Case Study</button>
-          </div>
-        </div>
-        <!-- 6: Dead Flowers Brand -->
-        <div class="carousel-slide">
-          <img src="/assets/deadflowers/brand-hero.jpg" alt="Dead Flowers Brand Hero">
-          <div class="flex-1 flex flex-col justify-between p-6">
-            <div>
-              <h3 class="text-xl font-bold mb-2">Dead Flowers Brand</h3>
-              <span class="block text-orange-500 mb-1">Dead Flowers Collective</span>
-              <p class="text-gray-600 mb-4 text-sm">
-                Built the identity for Philly’s wildest collective—logo, event posters, merch, photography, and stage management for live sideshow events.<br>
-                <span class="italic">“Amaze, entertain, shock, and wow the audience.”</span>
-              </p>
-            </div>
-            <button data-modal="modal-deadflowers" class="text-orange-500 font-medium hover:text-orange-600 transition underline mt-2">View Full Case Study</button>
-          </div>
-        </div>
-        <!-- 7: Neighbors Credit Union -->
-        <div class="carousel-slide">
-          <img src="/assets/neighbors-cu/website-hero.jpg" alt="Neighbors Credit Union Website Hero">
-          <div class="flex-1 flex flex-col justify-between p-6">
-            <div>
-              <h3 class="text-xl font-bold mb-2">Website Redesign</h3>
-              <span class="block text-orange-500 mb-1">Neighbors Credit Union</span>
-              <p class="text-gray-600 mb-4 text-sm">
-                Complete website refresh for a youth-focused, community-driven credit union. Defined content strategy, wrote microcopy, and built a welcoming, friendly user experience.
-              </p>
-            </div>
-            <button data-modal="modal-neighbors" class="text-orange-500 font-medium hover:text-orange-600 transition underline mt-2">View Full Case Study</button>
-          </div>
-        </div>
-        <!-- 8: LSU Digital Dining Concierge -->
-        <div class="carousel-slide">
-          <img src="/assets/lsu-dining/concierge-animation.jpg" alt="LSU Digital Dining Concierge Animation">
-          <div class="flex-1 flex flex-col justify-between p-6">
-            <div>
-              <h3 class="text-xl font-bold mb-2">Digital Dining Concierge</h3>
-              <span class="block text-orange-500 mb-1">LSU</span>
-              <p class="text-gray-600 mb-4 text-sm">
-                Animated onboarding experience for LSU’s new digital dining concierge app. Art direction, animation, and UI/UX support for streamlined, accessible campus dining.
-              </p>
-            </div>
-            <button data-modal="modal-lsu" class="text-orange-500 font-medium hover:text-orange-600 transition underline mt-2">View Full Case Study</button>
-          </div>
-        </div>
-        <!-- 9: Fetal Care Center Dallas -->
-        <div class="carousel-slide">
-          <img src="/assets/fetal-care-center/campaign-hero.jpg" alt="Fetal Care Center Dallas Hero">
-          <div class="flex-1 flex flex-col justify-between p-6">
-            <div>
-              <h3 class="text-xl font-bold mb-2">Fetal Care Center Campaign</h3>
-              <span class="block text-orange-500 mb-1">Fetal Care Center Dallas</span>
-              <p class="text-gray-600 mb-4 text-sm">
-                Created warm, comforting brand materials for expectant parents and clinicians: digital guides, print collateral, and awareness campaigns supporting complex fetal care.
-              </p>
-            </div>
-            <button data-modal="modal-fetalcare" class="text-orange-500 font-medium hover:text-orange-600 transition underline mt-2">View Full Case Study</button>
-          </div>
-        </div>
-        <!-- 10: Cormeum Health App -->
-        <div class="carousel-slide">
-          <img src="/assets/cormeum/app-ui.jpg" alt="Cormeum Health App UI">
-          <div class="flex-1 flex flex-col justify-between p-6">
-            <div>
-              <h3 class="text-xl font-bold mb-2">Health App Branding & UI</h3>
-              <span class="block text-orange-500 mb-1">Cormeum</span>
-              <p class="text-gray-600 mb-4 text-sm">
-                Led visual identity and UI design for a heart health tracking app. Developed approachable iconography, color palette, and in-app microinteractions.
-              </p>
-            </div>
-            <button data-modal="modal-cormeum" class="text-orange-500 font-medium hover:text-orange-600 transition underline mt-2">View Full Case Study</button>
-          </div>
-        </div>
-        <!-- 11: Rainbow Muffler -->
-        <div class="carousel-slide">
-          <img src="/assets/rainbow-muffler/brand-collateral.jpg" alt="Rainbow Muffler Brand Collateral">
-          <div class="flex-1 flex flex-col justify-between p-6">
-            <div>
-              <h3 class="text-xl font-bold mb-2">Branding & Social</h3>
-              <span class="block text-orange-500 mb-1">Rainbow Muffler</span>
-              <p class="text-gray-600 mb-4 text-sm">
-                Bold rebranding for an automotive mainstay. Brought new life to social, signage, and print through color and playful voice.
-              </p>
-            </div>
-            <button data-modal="modal-rainbow" class="text-orange-500 font-medium hover:text-orange-600 transition underline mt-2">View Full Case Study</button>
-          </div>
-        </div>
-        <!-- 12: Autonation Social Campaign -->
-        <div class="carousel-slide">
-          <img src="/assets/autonation/social-campaign.jpg" alt="Autonation Social Campaign">
-          <div class="flex-1 flex flex-col justify-between p-6">
-            <div>
-              <h3 class="text-xl font-bold mb-2">Social Campaign</h3>
-              <span class="block text-orange-500 mb-1">Autonation</span>
-              <p class="text-gray-600 mb-4 text-sm">
-                Social content direction and copywriting for Autonation’s brand campaign—engagement-focused, human-driven, and fun.
-              </p>
-            </div>
-            <button data-modal="modal-autonation" class="text-orange-500 font-medium hover:text-orange-600 transition underline mt-2">View Full Case Study</button>
-          </div>
-        </div>
-        <!-- 13: ID Shop -->
-        <div class="carousel-slide">
-          <img src="/assets/id-shop/branding-hero.jpg" alt="ID Shop Branding">
-          <div class="flex-1 flex flex-col justify-between p-6">
-            <div>
-              <h3 class="text-xl font-bold mb-2">Branding & Product Content</h3>
-              <span class="block text-orange-500 mb-1">ID Shop</span>
-              <p class="text-gray-600 mb-4 text-sm">
-                B2B branding and modular product content for a national ID provider—streamlining documentation and visuals for diverse industry clients.
-              </p>
-            </div>
-            <button data-modal="modal-idshop" class="text-orange-500 font-medium hover:text-orange-600 transition underline mt-2">View Full Case Study</button>
-          </div>
-        </div>
-        <!-- 14: Food Photography / Recipe Cards -->
-        <div class="carousel-slide">
-          <img src="/assets/reading-terminal/food-photo-1.jpg" alt="Market Recipe Card">
-          <div class="flex-1 flex flex-col justify-between p-6">
-            <div>
-              <h3 class="text-xl font-bold mb-2">Recipe Cards & Food Photography</h3>
-              <span class="block text-orange-500 mb-1">Reading Terminal Market</span>
-              <p class="text-gray-600 mb-4 text-sm">
-                Designed, cooked, styled, and photographed seasonal recipes for Reading Terminal Market—blending culinary joy with vibrant design.
-              </p>
-            </div>
-            <button data-modal="modal-food" class="text-orange-500 font-medium hover:text-orange-600 transition underline mt-2">View Full Case Study</button>
-          </div>
-        </div>
-        <!-- === End Project Cards === -->
       </div>
     </div>
   </section>
 
-  <!-- === MODALS: DROP ALL OF THESE IN AFTER THE CAROUSEL === -->
-
-<!-- Shop Local Campaign – Reading Terminal Market -->
-<div id="modal-reading-terminal" class="fixed modal-bg left-0 top-0 w-full h-full z-50 hidden items-center justify-center">
-  <div class="modal bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 relative p-8">
-    <button class="absolute top-4 right-4 text-gray-500 text-2xl close-modal"><i class="fas fa-times"></i></button>
-    <div class="flex flex-col md:flex-row gap-8">
-      <div class="md:w-1/2">
-        <img src="/assets/reading-terminal/shop-local-hero.jpg" alt="Shop Local Campaign Hero" class="rounded-xl shadow-lg mb-4">
-        <img src="/assets/reading-terminal/direct-mailer.jpg" alt="Direct Mailer" class="rounded-xl shadow mb-2">
-        <img src="/assets/reading-terminal/metro-wrap.jpg" alt="Metro Wrap" class="rounded-xl shadow">
-      </div>
-      <div class="md:w-1/2">
-        <h2 class="text-2xl font-bold mb-3">Shop Local Campaign – Reading Terminal Market</h2>
-        <p class="mb-3">
-          “Shop Local” re-established Reading Terminal Market as <b>the</b> grocery for Philly locals, not just tourists. I served as Art Director & Graphic Designer—leading concept, copy, photography, and execution.
-        </p>
-        <ul class="mb-4 list-disc pl-5 text-gray-600">
-          <li>Multi-channel rollout: bus ads, direct mailers, Metro wraps, recipe cards.</li>
-          <li>Goal: “Fresh food for Philly—just one ride away.”</li>
-          <li>Emphasized local pride, accessibility, and seasonal recipes.</li>
-        </ul>
-        <a href="https://www.figma.com/proto/S0dUCkFst8TCHeZqi2MSRZ/BPG-Properties?page-id=0%3A1&type=design&node-id=76-453&viewport=-4219%2C1369%2C0.71&t=7O6xuxTRrENjypi6-1&scaling=min-zoom&starting-point-node-id=76%3A453&mode=design"
-           class="inline-block mt-2 text-orange-500 font-medium underline hover:text-orange-700" target="_blank">View Prototype</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- BPG Rental Properties Web Template -->
-<div id="modal-bpg" class="fixed modal-bg left-0 top-0 w-full h-full z-50 hidden items-center justify-center">
-  <div class="modal bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 relative p-8">
-    <button class="absolute top-4 right-4 text-gray-500 text-2xl close-modal"><i class="fas fa-times"></i></button>
-    <div class="flex flex-col md:flex-row gap-8">
-      <div class="md:w-1/2">
-        <img src="/assets/bpg/web-template-hero.jpg" alt="Web Template Hero" class="rounded-xl shadow-lg mb-4">
-        <img src="/assets/bpg/layout-wireframe.jpg" alt="Wireframe" class="rounded-xl shadow">
-      </div>
-      <div class="md:w-1/2">
-        <h2 class="text-2xl font-bold mb-3">Rental Properties Web Template – BPG</h2>
-        <p class="mb-3">
-          Developed a flexible template for BPG’s property sites: branding, layout, UX/UI, and prototyping.
-        </p>
-        <ul class="mb-4 list-disc pl-5 text-gray-600">
-          <li>Designed for easy content updates and varied brand identities.</li>
-          <li>Rapid prototyping and handoff using Figma.</li>
-        </ul>
-        <a href="https://www.figma.com/proto/S0dUCkFst8TCHeZqi2MSRZ/BPG-Properties?page-id=0%3A1&type=design&node-id=76-453&viewport=-4219%2C1369%2C0.71&t=7O6xuxTRrENjypi6-1&scaling=min-zoom&starting-point-node-id=76%3A453&mode=design"
-           class="inline-block mt-2 text-orange-500 font-medium underline hover:text-orange-700" target="_blank">View Prototype</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Truist Trudee AI Concierge -->
-<div id="modal-truist" class="fixed modal-bg left-0 top-0 w-full h-full z-50 hidden items-center justify-center">
-  <div class="modal bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 relative p-8">
-    <button class="absolute top-4 right-4 text-gray-500 text-2xl close-modal"><i class="fas fa-times"></i></button>
-    <div class="flex flex-col md:flex-row gap-8">
-      <div class="md:w-1/2">
-        <img src="/assets/truist/trudee-hero.jpg" alt="Trudee Concierge" class="rounded-xl shadow-lg mb-4">
-        <img src="/assets/truist/character-sheet.jpg" alt="Trudee Character Sheet" class="rounded-xl shadow">
-      </div>
-      <div class="md:w-1/2">
-        <h2 class="text-2xl font-bold mb-3">Trudee AI Concierge – Truist Bank</h2>
-        <p class="mb-3">
-          Conceived, designed, and branded “Trudee,” the digital concierge for Truist. Led all creative assets—character, onboarding materials, digital banners, table tents, and more.
-        </p>
-        <ul class="mb-4 list-disc pl-5 text-gray-600">
-          <li>Crafted a friendly, approachable brand voice and visuals.</li>
-          <li>Improved team engagement and digital adoption.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- SpArc Philly Rebrand -->
-<div id="modal-sparc" class="fixed modal-bg left-0 top-0 w-full h-full z-50 hidden items-center justify-center">
-  <div class="modal bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 relative p-8">
-    <button class="absolute top-4 right-4 text-gray-500 text-2xl close-modal"><i class="fas fa-times"></i></button>
-    <div class="flex flex-col md:flex-row gap-8">
-      <div class="md:w-1/2">
-        <img src="/assets/sparc/rebrand-hero.jpg" alt="SpArc Rebrand Hero" class="rounded-xl shadow-lg mb-4">
-        <img src="/assets/sparc/business-card.jpg" alt="Business Card" class="rounded-xl shadow">
-      </div>
-      <div class="md:w-1/2">
-        <h2 class="text-2xl font-bold mb-3">SpArc Philly Rebrand</h2>
-        <p class="mb-3">
-          Reimagined SpArc’s identity—infused it with bold color and joyful energy. Delivered comprehensive guidelines, print, and event collateral.
-        </p>
-        <ul class="mb-4 list-disc pl-5 text-gray-600">
-          <li>Brand standards, signage, donor mailers, and more.</li>
-          <li>Showcased the vibrancy and inclusivity of SpArc’s mission.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Continental Battery Systems -->
-<div id="modal-continental" class="fixed modal-bg left-0 top-0 w-full h-full z-50 hidden items-center justify-center">
-  <div class="modal bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 relative p-8">
-    <button class="absolute top-4 right-4 text-gray-500 text-2xl close-modal"><i class="fas fa-times"></i></button>
-    <div class="flex flex-col md:flex-row gap-8">
-      <div class="md:w-1/2">
-        <img src="/assets/continental-battery/product-page-hero.jpg" alt="Continental Battery Product Page Hero" class="rounded-xl shadow-lg mb-4">
-        <img src="/assets/continental-battery/insta-reel.jpg" alt="Instagram Reel" class="rounded-xl shadow">
-      </div>
-      <div class="md:w-1/2">
-        <h2 class="text-2xl font-bold mb-3">Product Page & Social Campaign – Continental Battery</h2>
-        <p class="mb-3">
-          Designed modular product pages for 100s of SKUs. Built landing pages, managed cross-platform social campaigns, and created story content & reels.
-        </p>
-        <ul class="mb-4 list-disc pl-5 text-gray-600">
-          <li>QR code-driven campaign and seamless digital journey.</li>
-          <li>Increased engagement, easy asset re-use.</li>
-        </ul>
-        <a href="https://www.figma.com/proto/m0OPvbatpw8UcyVQtbOKqr/CBS_Product-Page-Template?page-id=0%3A1&type=design&node-id=72-363&viewport=-2424%2C607%2C0.3&t=GTPoEHNIOkde9tu3-1&scaling=min-zoom&starting-point-node-id=72%3A363&content-scaling=fixed&hide-ui=1"
-           class="inline-block mt-2 text-orange-500 font-medium underline hover:text-orange-700" target="_blank">View Product Page</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Dead Flowers Brand -->
-<div id="modal-deadflowers" class="fixed modal-bg left-0 top-0 w-full h-full z-50 hidden items-center justify-center">
-  <div class="modal bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 relative p-8">
-    <button class="absolute top-4 right-4 text-gray-500 text-2xl close-modal"><i class="fas fa-times"></i></button>
-    <div class="flex flex-col md:flex-row gap-8">
-      <div class="md:w-1/2">
-        <img src="/assets/deadflowers/brand-hero.jpg" alt="Dead Flowers Brand Hero" class="rounded-xl shadow-lg mb-4">
-        <img src="/assets/deadflowers/event-poster.jpg" alt="Event Poster" class="rounded-xl shadow">
-      </div>
-      <div class="md:w-1/2">
-        <h2 class="text-2xl font-bold mb-3">Dead Flowers Brand</h2>
-        <p class="mb-3">
-          Built the identity for Philly’s wildest collective: logo, event posters, merch, photography, and stage management for live sideshow events.<br>
-          <span class="italic">“Amaze, entertain, shock, and wow the audience.”</span>
-        </p>
-        <ul class="mb-4 list-disc pl-5 text-gray-600">
-          <li>Edgy but approachable visual language.</li>
-          <li>Design, merch, and creative direction for sold-out events.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Neighbors Credit Union -->
-<div id="modal-neighbors" class="fixed modal-bg left-0 top-0 w-full h-full z-50 hidden items-center justify-center">
-  <div class="modal bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 relative p-8">
-    <button class="absolute top-4 right-4 text-gray-500 text-2xl close-modal"><i class="fas fa-times"></i></button>
-    <div class="flex flex-col md:flex-row gap-8">
-      <div class="md:w-1/2">
-        <img src="/assets/neighbors-cu/website-hero.jpg" alt="Neighbors Credit Union Website Hero" class="rounded-xl shadow-lg mb-4">
-        <img src="/assets/neighbors-cu/ui-screens.jpg" alt="UI Screens" class="rounded-xl shadow">
-      </div>
-      <div class="md:w-1/2">
-        <h2 class="text-2xl font-bold mb-3">Website Redesign – Neighbors Credit Union</h2>
-        <p class="mb-3">
-          Complete website refresh for a youth-focused, community-driven credit union. Defined content strategy, wrote microcopy, and built a welcoming, friendly user experience.
-        </p>
-        <ul class="mb-4 list-disc pl-5 text-gray-600">
-          <li>UX writing, layout, and content structure for clarity.</li>
-          <li>Microcopy and navigation tailored to a younger audience.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- LSU Digital Dining Concierge -->
-<div id="modal-lsu" class="fixed modal-bg left-0 top-0 w-full h-full z-50 hidden items-center justify-center">
-  <div class="modal bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 relative p-8">
-    <button class="absolute top-4 right-4 text-gray-500 text-2xl close-modal"><i class="fas fa-times"></i></button>
-    <div class="flex flex-col md:flex-row gap-8">
-      <div class="md:w-1/2">
-        <img src="/assets/lsu-dining/concierge-animation.jpg" alt="LSU Digital Dining Concierge Animation" class="rounded-xl shadow-lg mb-4">
-        <img src="/assets/lsu-dining/app-ui.jpg" alt="Dining Concierge App UI" class="rounded-xl shadow">
-      </div>
-      <div class="md:w-1/2">
-        <h2 class="text-2xl font-bold mb-3">Digital Dining Concierge – LSU</h2>
-        <p class="mb-3">
-          Animated onboarding experience for LSU’s digital dining concierge app. Art direction, animation, and UI/UX support for streamlined, accessible campus dining.
-        </p>
-        <ul class="mb-4 list-disc pl-5 text-gray-600">
-          <li>Accessible UX and onboarding animation for campus-wide rollout.</li>
-          <li>Collaboration with development team for seamless integration.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Fetal Care Center Dallas -->
-<div id="modal-fetalcare" class="fixed modal-bg left-0 top-0 w-full h-full z-50 hidden items-center justify-center">
-  <div class="modal bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 relative p-8">
-    <button class="absolute top-4 right-4 text-gray-500 text-2xl close-modal"><i class="fas fa-times"></i></button>
-    <div class="flex flex-col md:flex-row gap-8">
-      <div class="md:w-1/2">
-        <img src="/assets/fetal-care-center/campaign-hero.jpg" alt="Fetal Care Center Dallas Hero" class="rounded-xl shadow-lg mb-4">
-        <img src="/assets/fetal-care-center/guide-cover.jpg" alt="Guide Cover" class="rounded-xl shadow">
-      </div>
-      <div class="md:w-1/2">
-        <h2 class="text-2xl font-bold mb-3">Fetal Care Center Dallas Campaign</h2>
-        <p class="mb-3">
-          Created warm, comforting brand materials for expectant parents and clinicians: digital guides, print collateral, and awareness campaigns supporting complex fetal care.
-        </p>
-        <ul class="mb-4 list-disc pl-5 text-gray-600">
-          <li>Brand voice, visual strategy, and community outreach assets.</li>
-          <li>Emphasis on clarity, empathy, and resource navigation.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Cormeum Health App -->
-<div id="modal-cormeum" class="fixed modal-bg left-0 top-0 w-full h-full z-50 hidden items-center justify-center">
-  <div class="modal bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 relative p-8">
-    <button class="absolute top-4 right-4 text-gray-500 text-2xl close-modal"><i class="fas fa-times"></i></button>
-    <div class="flex flex-col md:flex-row gap-8">
-      <div class="md:w-1/2">
-        <img src="/assets/cormeum/app-ui.jpg" alt="Cormeum Health App UI" class="rounded-xl shadow-lg mb-4">
-        <img src="/assets/cormeum/icon-set.jpg" alt="App Icon Set" class="rounded-xl shadow">
-      </div>
-      <div class="md:w-1/2">
-        <h2 class="text-2xl font-bold mb-3">Health App Branding & UI – Cormeum</h2>
-        <p class="mb-3">
-          Led visual identity and UI design for a heart health tracking app. Developed approachable iconography, color palette, and in-app microinteractions.
-        </p>
-        <ul class="mb-4 list-disc pl-5 text-gray-600">
-          <li>Brand system, app UI, iconography.</li>
-          <li>User onboarding flow and visual feedback system.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Rainbow Muffler -->
-<div id="modal-rainbow" class="fixed modal-bg left-0 top-0 w-full h-full z-50 hidden items-center justify-center">
-  <div class="modal bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 relative p-8">
-    <button class="absolute top-4 right-4 text-gray-500 text-2xl close-modal"><i class="fas fa-times"></i></button>
-    <div class="flex flex-col md:flex-row gap-8">
-      <div class="md:w-1/2">
-        <img src="/assets/rainbow-muffler/brand-collateral.jpg" alt="Rainbow Muffler Brand Collateral" class="rounded-xl shadow-lg mb-4">
-        <img src="/assets/rainbow-muffler/signage.jpg" alt="Signage" class="rounded-xl shadow">
-      </div>
-      <div class="md:w-1/2">
-        <h2 class="text-2xl font-bold mb-3">Branding & Social – Rainbow Muffler</h2>
-        <p class="mb-3">
-          Bold rebranding for an automotive mainstay. Brought new life to social, signage, and print through color and playful voice.
-        </p>
-        <ul class="mb-4 list-disc pl-5 text-gray-600">
-          <li>Brand refresh, color system, and content rollout.</li>
-          <li>Expanded engagement via new visuals and playful language.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Autonation Social Campaign -->
-<div id="modal-autonation" class="fixed modal-bg left-0 top-0 w-full h-full z-50 hidden items-center justify-center">
-  <div class="modal bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 relative p-8">
-    <button class="absolute top-4 right-4 text-gray-500 text-2xl close-modal"><i class="fas fa-times"></i></button>
-    <div class="flex flex-col md:flex-row gap-8">
-      <div class="md:w-1/2">
-        <img src="/assets/autonation/social-campaign.jpg" alt="Autonation Social Campaign" class="rounded-xl shadow-lg mb-4">
-        <img src="/assets/autonation/post-series.jpg" alt="Post Series" class="rounded-xl shadow">
-      </div>
-      <div class="md:w-1/2">
-        <h2 class="text-2xl font-bold mb-3">Social Campaign – Autonation</h2>
-        <p class="mb-3">
-          Social content direction and copywriting for Autonation’s brand campaign—engagement-focused, human-driven, and fun.
-        </p>
-        <ul class="mb-4 list-disc pl-5 text-gray-600">
-          <li>Post series, tone, and campaign language.</li>
-          <li>Focused on high engagement and brand affinity.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ID Shop -->
-<div id="modal-idshop" class="fixed modal-bg left-0 top-0 w-full h-full z-50 hidden items-center justify-center">
-  <div class="modal bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 relative p-8">
-    <button class="absolute top-4 right-4 text-gray-500 text-2xl close-modal"><i class="fas fa-times"></i></button>
-    <div class="flex flex-col md:flex-row gap-8">
-      <div class="md:w-1/2">
-        <img src="/assets/id-shop/branding-hero.jpg" alt="ID Shop Branding" class="rounded-xl shadow-lg mb-4">
-        <img src="/assets/id-shop/product-display.jpg" alt="Product Display" class="rounded-xl shadow">
-      </div>
-      <div class="md:w-1/2">
-        <h2 class="text-2xl font-bold mb-3">Branding & Product Content – ID Shop</h2>
-        <p class="mb-3">
-          B2B branding and modular product content for a national ID provider—streamlining documentation and visuals for diverse industry clients.
-        </p>
-        <ul class="mb-4 list-disc pl-5 text-gray-600">
-          <li>Brand guide, product docs, and visual library.</li>
-          <li>Increased client satisfaction and ease of use.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Food Photography / Recipe Cards -->
-<div id="modal-food" class="fixed modal-bg left-0 top-0 w-full h-full z-50 hidden items-center justify-center">
-  <div class="modal bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-4 relative p-8">
-    <button class="absolute top-4 right-4 text-gray-500 text-2xl close-modal"><i class="fas fa-times"></i></button>
-    <div class="flex flex-col md:flex-row gap-8">
-      <div class="md:w-1/2">
-        <img src="/assets/reading-terminal/food-photo-1.jpg" alt="Market Recipe Card" class="rounded-xl shadow-lg mb-4">
-        <img src="/assets/reading-terminal/food-photo-2.jpg" alt="Food Photography" class="rounded-xl shadow">
-      </div>
-      <div class="md:w-1/2">
-        <h2 class="text-2xl font-bold mb-3">Recipe Cards & Food Photography</h2>
-        <p class="mb-3">
-          Designed, cooked, styled, and photographed seasonal recipes for Reading Terminal Market—blending culinary joy with vibrant design.
-        </p>
-        <ul class="mb-4 list-disc pl-5 text-gray-600">
-          <li>Every dish: tested, styled, shot, and laid out for real cooks.</li>
-          <li>Photography, color correction, and print prep in-house.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- End Modal Scaffolds -->
-
-  <!-- MODAL LOGIC (unchanged, robust) -->
+  <!-- PDF.js JavaScript Implementation -->
   <script>
-    document.querySelectorAll('[data-modal]').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.preventDefault();
-        const id = btn.getAttribute('data-modal');
-        document.getElementById(id).classList.add('modal-active');
-        document.getElementById(id).classList.remove('hidden');
-        document.body.style.overflow = "hidden";
+    // Set up PDF.js worker
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    
+    // PDF viewer implementation
+    document.addEventListener('DOMContentLoaded', function() {
+      const url = 'portfolio.pdf';
+      let pdfDoc = null;
+      let currentPage = 1;
+      let scale = 1.0;
+      let initialScale = 1.0;
+      
+      let canvas = document.getElementById('pdf-canvas');
+      const pageNumInput = document.getElementById('page-num');
+      const pageCountSpan = document.getElementById('page-count');
+      const prevPageBtn = document.getElementById('prev-page');
+      const nextPageBtn = document.getElementById('next-page');
+      const zoomInBtn = document.getElementById('zoom-in');
+      const zoomOutBtn = document.getElementById('zoom-out');
+      const fitWindowBtn = document.getElementById('fit-window');
+      const resetViewBtn = document.getElementById('reset-view');
+      const toggleInteractiveBtn = document.getElementById('toggle-interactive');
+      
+      // Show loading message
+      const viewerContainer = document.getElementById('pdf-viewer-container');
+      viewerContainer.innerHTML = `
+        <div class="flex flex-col items-center justify-center h-full text-center p-8">
+          <i class="fas fa-spinner fa-spin text-4xl text-orange-500 mb-4"></i>
+          <h3 class="text-xl font-medium mb-2">Loading Portfolio...</h3>
+          <p class="text-gray-600">Please wait while we load your PDF.</p>
+        </div>
+      `;
+      
+      // Load PDF with additional options
+      console.log('Attempting to load PDF from:', url);
+      const loadingTask = pdfjsLib.getDocument({
+        url: url,
+        cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/',
+        cMapPacked: true,
+        enableXfa: true
       });
-    });
-    document.querySelectorAll('.close-modal').forEach(btn => {
-      btn.addEventListener('click', e => {
-        const modal = btn.closest('.modal-bg');
-        modal.classList.remove('modal-active');
-        setTimeout(() => modal.classList.add('hidden'), 200);
-        document.body.style.overflow = "";
+      
+      loadingTask.promise.then(function(pdf) {
+        console.log('PDF loaded successfully. Pages:', pdf.numPages);
+        pdfDoc = pdf;
+        pageCountSpan.textContent = pdf.numPages;
+        
+        // Clear loading message and show canvas
+        viewerContainer.innerHTML = '<canvas id="pdf-canvas"></canvas>';
+        canvas = document.getElementById('pdf-canvas');
+        
+        renderPage(currentPage);
+        
+        // Enable/disable navigation buttons
+        prevPageBtn.disabled = currentPage <= 1;
+        nextPageBtn.disabled = currentPage >= pdf.numPages;
+      }).catch(function(error) {
+        console.error('Error loading PDF:', error);
+        console.error('Error details:', error.name, error.message);
+        viewerContainer.innerHTML = `
+          <div class="flex flex-col items-center justify-center h-full text-center p-8">
+            <i class="fas fa-exclamation-triangle text-6xl text-red-500 mb-4"></i>
+            <h3 class="text-2xl font-bold mb-2">Unable to Load Portfolio</h3>
+            <p class="text-gray-600 mb-2">Error: ${error.message}</p>
+            <p class="text-gray-500 mb-4 text-sm">Note: PDF files require a web server to load properly. Try opening this page through a local server.</p>
+            <div class="flex gap-3">
+              <button class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition duration-300" onclick="location.reload()">
+                <i class="fas fa-redo mr-2"></i> Retry
+              </button>
+              <button class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition duration-300" onclick="showFallbackPDF()">
+                <i class="fas fa-file-pdf mr-2"></i> View PDF Direct
+              </button>
+            </div>
+          </div>
+        `;
       });
-    });
-    window.addEventListener('keydown', e => {
-      if (e.key === "Escape") {
-        document.querySelectorAll('.modal-bg.modal-active').forEach(modal => {
-          modal.classList.remove('modal-active');
-          setTimeout(() => modal.classList.add('hidden'), 200);
-          document.body.style.overflow = "";
-        });
+      
+      // Calculate optimal scale to fit viewport
+      function calculateFitScale(page) {
+        const container = document.getElementById('pdf-viewer-container');
+        const containerWidth = container.clientWidth - 40; // Account for padding
+        const containerHeight = container.clientHeight - 40;
+        
+        const viewport = page.getViewport({ scale: 1.0 });
+        const scaleX = containerWidth / viewport.width;
+        const scaleY = containerHeight / viewport.height;
+        
+        // Use the smaller scale to ensure the page fits entirely
+        return Math.min(scaleX, scaleY, 2.0); // Cap at 2.0 for readability
       }
+      
+      // Render page
+      function renderPage(num) {
+        pdfDoc.getPage(num).then(function(page) {
+          // Calculate optimal scale on first render
+          if (num === 1 && scale === 1.0) {
+            initialScale = calculateFitScale(page);
+            scale = initialScale;
+          }
+          
+          const viewport = page.getViewport({ scale: scale });
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
+          
+          const renderContext = {
+            canvasContext: canvas.getContext('2d'),
+            viewport: viewport
+          };
+          
+          page.render(renderContext);
+        });
+        
+        // Update page counter
+        pageNumInput.value = num;
+        
+        // Enable/disable navigation buttons
+        prevPageBtn.disabled = num <= 1;
+        nextPageBtn.disabled = num >= pdfDoc.numPages;
+      }
+      
+      // Button events
+      prevPageBtn.addEventListener('click', function() {
+        if (currentPage <= 1) return;
+        currentPage--;
+        renderPage(currentPage);
+      });
+      
+      nextPageBtn.addEventListener('click', function() {
+        if (currentPage >= pdfDoc.numPages) return;
+        currentPage++;
+        renderPage(currentPage);
+      });
+      
+      pageNumInput.addEventListener('change', function() {
+        const pageNum = parseInt(this.value);
+        if (pageNum >= 1 && pageNum <= pdfDoc.numPages) {
+          currentPage = pageNum;
+          renderPage(currentPage);
+        } else {
+          this.value = currentPage;
+        }
+      });
+      
+      zoomInBtn.addEventListener('click', function() {
+        scale += 0.2;
+        renderPage(currentPage);
+      });
+      
+      zoomOutBtn.addEventListener('click', function() {
+        if (scale > 0.5) {
+          scale -= 0.2;
+          renderPage(currentPage);
+        }
+      });
+      
+      fitWindowBtn.addEventListener('click', function() {
+        if (pdfDoc && currentPage) {
+          pdfDoc.getPage(currentPage).then(function(page) {
+            scale = calculateFitScale(page);
+            renderPage(currentPage);
+          });
+        }
+      });
+      
+      resetViewBtn.addEventListener('click', function() {
+        scale = initialScale;
+        renderPage(currentPage);
+      });
+      
+      // Handle window resize to recalculate optimal scale
+      window.addEventListener('resize', function() {
+        if (pdfDoc && currentPage) {
+          pdfDoc.getPage(currentPage).then(function(page) {
+            initialScale = calculateFitScale(page);
+            scale = initialScale;
+            renderPage(currentPage);
+          });
+        }
+      });
+      
+      // Toggle between PDF.js and interactive embed
+      let isInteractiveMode = false;
+      toggleInteractiveBtn.addEventListener('click', function() {
+        const pdfContainer = document.getElementById('pdf-viewer-container');
+        const interactiveContainer = document.getElementById('interactive-pdf-container');
+        const controls = document.querySelector('.pdf-controls');
+        
+        if (!isInteractiveMode) {
+          // Switch to interactive mode
+          pdfContainer.style.display = 'none';
+          interactiveContainer.style.display = 'block';
+          toggleInteractiveBtn.innerHTML = '<i class="fas fa-layer-group"></i> PDF.js';
+          
+          // Hide PDF.js specific controls
+          prevPageBtn.style.display = 'none';
+          nextPageBtn.style.display = 'none';
+          pageNumInput.parentElement.style.display = 'none';
+          zoomInBtn.style.display = 'none';
+          zoomOutBtn.style.display = 'none';
+          fitWindowBtn.style.display = 'none';
+          resetViewBtn.style.display = 'none';
+          
+          isInteractiveMode = true;
+        } else {
+          // Switch back to PDF.js mode
+          pdfContainer.style.display = 'flex';
+          interactiveContainer.style.display = 'none';
+          toggleInteractiveBtn.innerHTML = '<i class="fas fa-mouse-pointer"></i> Interactive';
+          
+          // Show PDF.js controls
+          prevPageBtn.style.display = 'inline-block';
+          nextPageBtn.style.display = 'inline-block';
+          pageNumInput.parentElement.style.display = 'flex';
+          zoomInBtn.style.display = 'inline-block';
+          zoomOutBtn.style.display = 'inline-block';
+          fitWindowBtn.style.display = 'inline-block';
+          resetViewBtn.style.display = 'inline-block';
+          
+          isInteractiveMode = false;
+        }
+      });
+      
+      // Fallback function to show PDF in iframe
+      window.showFallbackPDF = function() {
+        const viewerContainer = document.getElementById('pdf-viewer-container');
+        viewerContainer.innerHTML = `
+          <iframe src="portfolio.pdf" width="100%" height="100%" style="border: none; min-height: 80vh;">
+            <p>Your browser does not support iframes. <a href="portfolio.pdf" target="_blank">Click here to view the PDF</a>.</p>
+          </iframe>
+        `;
+      };
     });
   </script>
 
